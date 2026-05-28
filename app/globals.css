@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-green-deep: #1B4D2E;
+  --color-green-mid: #2D6A4F;
+  --color-green-light: #E8F5EE;
+  --color-terra: #C2714F;
+  --color-terra-light: #F9EDE8;
+  --color-cream: #F5F0E8;
+  --color-cream-dark: #EDE5D8;
+  --color-charcoal: #2C2C2C;
+  --color-charcoal-light: #555555;
+  --color-soft-yellow: #F4C430;
+  --color-soft-yellow-light: #FEF9E7;
+  --color-gold: #C8A96E;
+
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+:root {
+  --background: #F5F0E8;
+  --foreground: #2C2C2C;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Prevent iOS Safari auto-zoom on input focus */
+input, select, textarea {
+  font-size: 1rem;
+}
+
+/* Bottom nav spacing on mobile — includes safe-area for notched devices */
+@media (max-width: 767px) {
+  main {
+    padding-bottom: max(6rem, calc(5rem + env(safe-area-inset-bottom)));
+  }
+}
