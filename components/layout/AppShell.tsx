@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { usePathname } from "next/navigation";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -28,7 +28,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {!isDemoRoute && <Footer />}
       {!isDemoRoute && <BottomNav />}
       <Toaster />
-      <DemoBar />
+      <Suspense>
+        <DemoBar />
+      </Suspense>
     </>
   );
 }
