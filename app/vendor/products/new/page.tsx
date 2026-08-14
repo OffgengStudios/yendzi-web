@@ -65,6 +65,7 @@ export default function NewProductPage() {
       description: form.description,
       harvestDate: form.harvestDate,
       image: form.image,
+      badges: form.selectedBadges,
       status: form.status,
     });
     setSaved(true);

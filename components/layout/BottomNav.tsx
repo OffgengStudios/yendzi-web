@@ -27,8 +27,7 @@ export function BottomNav() {
     pathname.startsWith("/vendor") ||
     pathname.startsWith("/admin") ||
     pathname.startsWith("/checkout") ||
-    pathname.startsWith("/signup") ||
-    pathname.startsWith("/verify")
+    pathname.startsWith("/signup")
   ) return null;
 
   return (

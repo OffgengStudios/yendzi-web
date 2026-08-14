@@ -13,6 +13,7 @@ export interface VendorProduct {
   description: string;
   harvestDate: string;
   image: string;
+  badges: string[];
   status: "live" | "draft";
   createdAt: string;
 }
@@ -58,6 +59,7 @@ const MOCK_PRODUCTS: VendorProduct[] = [
     description: "Vine-ripened tomatoes grown without pesticides on rich Aburi soil.",
     harvestDate: "2026-05-27",
     image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=500",
+    badges: ["organic", "locally-grown"],
     status: "live",
     createdAt: "2026-05-01",
   },
@@ -71,6 +73,7 @@ const MOCK_PRODUCTS: VendorProduct[] = [
     description: "Fresh, dark green kontomire (cocoyam leaves). Harvested daily.",
     harvestDate: "2026-05-27",
     image: "https://images.pexels.com/photos/30893239/pexels-photo-30893239.jpeg?auto=compress&cs=tinysrgb&w=500",
+    badges: ["locally-grown", "seasonal"],
     status: "live",
     createdAt: "2026-05-01",
   },
@@ -84,6 +87,7 @@ const MOCK_PRODUCTS: VendorProduct[] = [
     description: "Firm, fresh garden eggs perfect for palava sauce and garden egg stew.",
     harvestDate: "2026-05-26",
     image: "https://images.pexels.com/photos/6576755/pexels-photo-6576755.jpeg?auto=compress&cs=tinysrgb&w=500",
+    badges: ["locally-grown"],
     status: "draft",
     createdAt: "2026-05-10",
   },
@@ -108,6 +112,7 @@ export const useVendorStore = create<VendorStore>()(
             ...state.products,
             {
               ...p,
+              badges: p.badges ?? [],
               id: "vp-" + Math.random().toString(36).slice(2),
               createdAt: new Date().toISOString().split("T")[0],
             },
@@ -126,6 +131,15 @@ export const useVendorStore = create<VendorStore>()(
     }),
     {
       name: "yendzi-vendor",
+      // v1 added VendorProduct.badges — backfill it on stores written before.
+      version: 1,
+      migrate: (persisted, version) => {
+        const state = persisted as { products?: VendorProduct[] } | undefined;
+        if (version < 1 && state?.products) {
+          state.products = state.products.map((p) => ({ ...p, badges: p.badges ?? [] }));
+        }
+        return state;
+      },
       partialize: (state) => ({
         isVendor: state.isVendor,
         isApproved: state.isApproved,

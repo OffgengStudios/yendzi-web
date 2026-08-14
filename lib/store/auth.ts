@@ -14,8 +14,6 @@ interface User {
 interface AuthStore {
   user: User | null;
   isAuthenticated: boolean;
-  pendingPhone: string;
-  setPendingPhone: (phone: string) => void;
   login: (phone: string, name?: string, role?: "customer" | "vendor") => void;
   logout: () => void;
 }
@@ -25,9 +23,6 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
-      pendingPhone: "",
-
-      setPendingPhone: (phone) => set({ pendingPhone: phone }),
 
       login: (phone, name?: string, role: "customer" | "vendor" = "customer") =>
         set({
@@ -39,14 +34,16 @@ export const useAuthStore = create<AuthStore>()(
             role,
           },
           isAuthenticated: true,
-          pendingPhone: "",
         }),
 
       logout: () => set({ user: null, isAuthenticated: false }),
     }),
     {
       name: "yendzi-auth",
-      partialize: (state) => ({ user: state.user, isAuthenticated: state.isAuthenticated }),
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
     }
   )
 );

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Package, Clock, CheckCircle2, Truck, ShoppingBag, User, LogOut } from "lucide-react";
 import { useAuthStore } from "../../lib/store/auth";
+import { useHydrated } from "../../lib/hooks/useHydrated";
 import { useRouter } from "next/navigation";
 
 const MOCK_ORDERS = [
@@ -44,6 +45,13 @@ const statusConfig = {
 export default function AccountPage() {
   const { user, isAuthenticated, logout } = useAuthStore();
   const router = useRouter();
+  const hydrated = useHydrated();
+
+  // The auth store is restored from localStorage, so the signed-in view must
+  // not be rendered until after hydration or the server HTML won't match.
+  if (!hydrated) {
+    return <div className="min-h-[60vh]" aria-busy="true" />;
+  }
 
   if (!isAuthenticated) {
     return (

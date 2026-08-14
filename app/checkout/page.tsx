@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "../../lib/store/cart";
 import { useAuthStore } from "../../lib/store/auth";
+import { useToastStore } from "../../lib/store/toast";
+import { useHydrated } from "../../lib/hooks/useHydrated";
 import { CartItem } from "../../components/cart/CartItem";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
@@ -40,38 +42,60 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, total, clearCart } = useCartStore();
   const { isAuthenticated, user } = useAuthStore();
+  const pushToast = useToastStore((s) => s.push);
+  const hydrated = useHydrated();
   const [step, setStep] = useState<Step>("address");
   const [address, setAddress] = useState({ area: "", street: "", notes: "" });
   const [slot, setSlot] = useState("");
   const [paying, setPaying] = useState(false);
+  // Set the moment payment succeeds, before the cart is emptied, so the
+  // empty-cart guard below does not bounce the customer away from the
+  // confirmation page they are being routed to.
+  const [orderPlaced, setOrderPlaced] = useState(false);
   const cartTotal = total();
   const deliveryFee = 25;
   const grandTotal = cartTotal + deliveryFee;
 
   useEffect(() => {
-    if (!isAuthenticated) router.replace("/signup");
+    // Both guards read localStorage-backed stores, which are still empty on
+    // the first effect pass — acting then threw signed-in customers with a
+    // full cart back to /shop.
+    if (!hydrated || orderPlaced) return;
+    if (!isAuthenticated) {
+      router.replace("/signup");
+      return;
+    }
     if (items.length === 0) router.replace("/shop");
-  }, [isAuthenticated, items.length, router]);
+  }, [hydrated, isAuthenticated, items.length, orderPlaced, router]);
 
   const stepIndex = STEPS.findIndex((s) => s.id === step);
 
   const handlePayment = () => {
     if (!user) return;
     setPaying(true);
-    openPaystackCheckout({
+    const result = openPaystackCheckout({
       email: user.email ?? `${user.phone.replace(/\s/g, "")}@yendzi.app`,
       amountGHS: grandTotal,
       phone: user.phone,
       firstName: user.name,
       onSuccess: (reference) => {
+        setOrderPlaced(true);
         clearCart();
         router.push(`/order-confirmed?ref=${reference}`);
       },
       onClose: () => setPaying(false),
     });
+
+    // The modal never opened, so neither callback will fire — release the
+    // button rather than leaving it disabled forever.
+    if (!result.ok) {
+      setPaying(false);
+      pushToast(result.message, "error");
+    }
   };
 
-  if (items.length === 0) return null;
+  if (!hydrated) return null;
+  if (items.length === 0 && !orderPlaced) return null;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">

@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-
 import { usePathname } from "next/navigation";
 import { useCartStore } from "../../lib/store/cart";
 import { useAuthStore } from "../../lib/store/auth";
+import { useHydrated } from "../../lib/hooks/useHydrated";
 import { SearchModal } from "../ui/SearchModal";
 
 const springTap = { type: "spring", stiffness: 500, damping: 28 } as const;
@@ -17,10 +18,13 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const hasHydrated = useCartStore.persist?.hasHydrated?.() ?? false;
+  const hasHydrated = useHydrated();
   const itemCount = useCartStore((s) => s.items.reduce((sum, item) => sum + item.quantity, 0));
   const toggleCart = useCartStore((s) => s.toggleCart);
-  const { isAuthenticated, logout, user } = useAuthStore();
+  const { isAuthenticated: authFromStore, logout, user } = useAuthStore();
+  // Both stores are localStorage-persisted, so neither may influence the
+  // first client render.
+  const isAuthenticated = hasHydrated && authFromStore;
 
   const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 60));
@@ -110,7 +114,7 @@ export function Header() {
 
             {isAuthenticated ? (
               <Link
-                href={user?.role === "vendor" ? "/vendor/dashboard" : "/shop"}
+                href={user?.role === "vendor" ? "/vendor/dashboard" : "/account"}
                 className={`hidden md:block text-sm font-medium transition-colors duration-300 ${signInLink}`}
               >
                 {user?.role === "vendor" ? "My Dashboard" : "My Account"}

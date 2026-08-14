@@ -72,11 +72,16 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
 
-  const fullPhone = `+233${phone.replace(/^0+/, "")}`;
+  // Accept 0241234567, 241234567 or 233241234567 and reduce them all to the
+  // 9-digit national number. Validating before this step let 024412345 — nine
+  // characters but only eight once the trunk 0 is dropped — through as a
+  // malformed +2338xxxxxxx.
+  const nationalPhone = phone.replace(/\D/g, "").replace(/^(?:233|0)/, "");
+  const fullPhone = `+233${nationalPhone}`;
   const cfg = roleCfg[role];
 
   const handleSendOtp = async () => {
-    if (phone.replace(/\D/g, "").length < 9) return setError("Enter a valid 9-digit Ghanaian number");
+    if (nationalPhone.length !== 9) return setError("Enter a valid 9-digit Ghanaian number");
     setLoading(true);
     setError("");
     try {

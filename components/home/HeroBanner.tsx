@@ -168,13 +168,17 @@ export function HeroBanner() {
         <div className="relative hidden lg:flex items-center justify-center">
           <div className="relative w-full max-w-[440px]">
             <div className="relative aspect-[4/5] bg-gradient-to-br from-green-mid to-green-deep/60 overflow-hidden">
-              <motion.div className="absolute inset-0" style={{ scale: imageScale }}>
+              {/* opacity belongs on the motion element — next/image is a plain
+                  component and would receive the MotionValue as a raw object */}
+              <motion.div
+                className="absolute inset-0"
+                style={{ scale: imageScale, opacity: imageOpacity }}
+              >
                 <Image
                   src="https://images.pexels.com/photos/30893239/pexels-photo-30893239.jpeg?auto=compress&cs=tinysrgb&w=1000"
                   alt="Fresh Kontomire at a Ghanaian market stall"
                   fill
                   className="object-cover"
-                  style={{ opacity: imageOpacity as unknown as number }}
                   priority
                   sizes="440px"
                 />
