@@ -73,7 +73,7 @@ export default function CheckoutPage() {
   const handlePayment = () => {
     if (!user) return;
     setPaying(true);
-    const result = openPaystackCheckout({
+    openPaystackCheckout({
       email: user.email ?? `${user.phone.replace(/\s/g, "")}@yendzi.app`,
       amountGHS: grandTotal,
       phone: user.phone,
@@ -83,15 +83,14 @@ export default function CheckoutPage() {
         clearCart();
         router.push(`/order-confirmed?ref=${reference}`);
       },
-      onClose: () => setPaying(false),
+      onCancel: () => setPaying(false),
+      // Covers both a modal that never opened and one that failed after
+      // opening — either way the button must not stay disabled.
+      onFailure: (message) => {
+        setPaying(false);
+        pushToast(message, "error");
+      },
     });
-
-    // The modal never opened, so neither callback will fire — release the
-    // button rather than leaving it disabled forever.
-    if (!result.ok) {
-      setPaying(false);
-      pushToast(result.message, "error");
-    }
   };
 
   if (!hydrated) return null;

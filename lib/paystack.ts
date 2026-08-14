@@ -1,35 +1,14 @@
-declare global {
-  interface Window {
-    // Undefined until the external inline script has loaded — and forever if
-    // it is blocked.
-    PaystackPop?: {
-      setup: (options: PaystackOptions) => { openIframe: () => void };
-    };
-  }
-}
-
-interface PaystackOptions {
-  key: string;
-  email: string;
-  amount: number;
-  currency?: string;
-  ref?: string;
-  firstname?: string;
-  lastname?: string;
-  phone?: string;
-  onClose?: () => void;
-  callback?: (response: { reference: string }) => void;
-}
-
-export type PaystackLaunchResult =
-  | { ok: true }
-  | { ok: false; reason: "missing-key" | "script-unavailable" | "setup-failed"; message: string };
-
 /**
- * Opens the Paystack inline checkout.
+ * Paystack checkout via InlineJS v2 (`@paystack/inline-js`).
  *
- * Returns a result rather than throwing so the caller can restore its own UI
- * state — `onSuccess`/`onClose` never fire when the modal fails to launch.
+ * v2 is imported from npm rather than loaded from js.paystack.co, so there is
+ * no external script for an ad blocker or CSP to remove. The import is dynamic
+ * to keep the SDK out of the server bundle and off the initial page load — it
+ * is only needed once someone reaches the pay button.
+ *
+ * Every failure mode reaches `onFailure`: a missing key, a chunk that will not
+ * load, and — the case v1 could not report at all — a transaction the SDK
+ * accepts and then fails to initialise, which arrives via v2's `onError`.
  */
 export function openPaystackCheckout(options: {
   email: string;
@@ -37,52 +16,48 @@ export function openPaystackCheckout(options: {
   phone?: string;
   firstName?: string;
   onSuccess: (reference: string) => void;
-  onClose?: () => void;
-}): PaystackLaunchResult {
+  onCancel?: () => void;
+  onFailure?: (message: string) => void;
+}): void {
+  const fail = (message: string) => options.onFailure?.(message);
+
   const key = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;
   if (!key) {
     console.error("NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY is not set");
-    return {
-      ok: false,
-      reason: "missing-key",
-      message: "Payment is not configured yet. Please try again later.",
-    };
+    fail("Payment is not configured yet. Please try again later.");
+    return;
   }
 
-  // The inline script is loaded from js.paystack.co; ad blockers, offline
-  // devices and CSP failures all leave PaystackPop undefined.
-  if (typeof window === "undefined" || typeof window.PaystackPop?.setup !== "function") {
-    console.error("Paystack inline script is unavailable");
-    return {
-      ok: false,
-      reason: "script-unavailable",
-      message: "Could not reach the payment provider. Check your connection and try again.",
-    };
-  }
+  void (async () => {
+    let PaystackPop: typeof import("@paystack/inline-js").default;
+    try {
+      PaystackPop = (await import("@paystack/inline-js")).default;
+    } catch (err) {
+      console.error("Failed to load the Paystack SDK", err);
+      fail("Could not load the payment form. Check your connection and try again.");
+      return;
+    }
 
-  try {
-    const handler = window.PaystackPop.setup({
-      key,
-      email: options.email,
-      amount: Math.round(options.amountGHS * 100),
-      currency: "GHS",
-      ref: "YNZ-" + Date.now(),
-      firstname: options.firstName,
-      phone: options.phone,
-      callback: (response) => {
-        options.onSuccess(response.reference);
-      },
-      onClose: options.onClose,
-    });
-
-    handler.openIframe();
-    return { ok: true };
-  } catch (err) {
-    console.error("Paystack setup failed", err);
-    return {
-      ok: false,
-      reason: "setup-failed",
-      message: "Could not start the payment. Please try again.",
-    };
-  }
+    try {
+      new PaystackPop().newTransaction({
+        key,
+        email: options.email,
+        // Paystack expects the minor unit — pesewas for GHS.
+        amount: Math.round(options.amountGHS * 100),
+        currency: "GHS",
+        reference: "YNZ-" + Date.now(),
+        firstName: options.firstName,
+        phone: options.phone,
+        onSuccess: (transaction) => options.onSuccess(transaction.reference),
+        onCancel: () => options.onCancel?.(),
+        onError: (error) => {
+          console.error("Paystack transaction error", error);
+          fail(error.message || "The payment could not be started. Please try again.");
+        },
+      });
+    } catch (err) {
+      console.error("Paystack newTransaction threw", err);
+      fail("Could not start the payment. Please try again.");
+    }
+  })();
 }

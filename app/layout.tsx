@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { AppShell } from "../components/layout/AppShell";
 
@@ -28,10 +27,6 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="font-body min-h-screen flex flex-col bg-cream text-charcoal">
         <AppShell>{children}</AppShell>
-        <Script
-          src="https://js.paystack.co/v1/inline.js"
-          strategy="beforeInteractive"
-        />
       </body>
     </html>
   );
