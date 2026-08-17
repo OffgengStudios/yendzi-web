@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShoppingCart } from "lucide-react";
+import { Plus } from "lucide-react";
 import { motion } from "framer-motion";
-import { ProductBadge } from "../ui/Badge";
 import { FreshnessBadge } from "../product/FreshnessBadge";
 import { useCartStore } from "../../lib/store/cart";
 import { useToastStore } from "../../lib/store/toast";
@@ -14,72 +13,78 @@ interface ProductCardProps {
   product: Product;
 }
 
+/**
+ * A lot ticket, not a marketing card.
+ *
+ * The farm and the cutting date are the things Yendzi can claim and nobody
+ * else can, so they get typographic weight. Rating and badges were competing
+ * with them for attention and have been demoted. Prices are tabular so they
+ * line up down a column the way a written price list does.
+ */
 export function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const toast = useToastStore((s) => s.push);
 
   return (
-    <motion.div
-      className="group bg-white rounded-2xl overflow-hidden border border-cream-dark"
-      whileHover={{ y: -3, boxShadow: "0 12px 32px rgba(0,0,0,0.10)" }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 400, damping: 28 }}
+    <motion.article
+      className="group bg-white border border-charcoal/15 flex flex-col h-full"
+      whileHover={{ y: -2 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
-      {/* Image */}
-      <Link href={`/shop/${product.slug}`} className="block relative aspect-square overflow-hidden">
+      <Link href={`/shop/${product.slug}`} className="block relative aspect-[5/4] overflow-hidden bg-cream-dark">
         <Image
           src={product.images[0]}
           alt={product.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
         />
-        <div className="absolute top-3 left-3">
-          <FreshnessBadge harvestDate={product.harvestDate} size="sm" />
+        <div className="absolute top-0 left-0">
+          <FreshnessBadge
+            harvestDate={product.harvestDate}
+            action={product.harvestAction}
+            category={product.category}
+            size="sm"
+          />
         </div>
       </Link>
 
-      {/* Content */}
-      <div className="p-4">
-        <div className="flex flex-wrap gap-1 mb-2">
-          {product.badges.slice(0, 2).map((badge) => (
-            <ProductBadge key={badge} badge={badge} size="sm" />
-          ))}
+      <div className="p-3.5 flex flex-col flex-1 gap-3">
+        <div className="min-h-[3.75rem]">
+          <Link href={`/shop/${product.slug}`}>
+            <h3 className="type-h3 text-charcoal hover:text-green-deep transition-colors line-clamp-2">
+              {product.name}
+            </h3>
+          </Link>
+          <p className="text-[12.5px] text-charcoal-light leading-snug mt-1">
+            {product.farmer.name} · {product.farmer.location.split(",")[0]}
+          </p>
         </div>
 
-        <Link href={`/shop/${product.slug}`}>
-          <h3 className="font-semibold text-charcoal text-base leading-snug hover:text-green-deep transition-colors mb-0.5">
-            {product.name}
-          </h3>
-        </Link>
-        <p className="text-xs text-charcoal-light mb-2">
-          by {product.farmer.name} · {product.farmer.location.split(",")[0]}
-        </p>
-
-        <div className="flex items-center gap-1 mb-3">
-          <Star className="w-3.5 h-3.5 fill-soft-yellow text-soft-yellow" />
-          <span className="text-xs font-medium text-charcoal">{product.rating}</span>
-          <span className="text-xs text-charcoal-light">({product.reviewCount})</span>
-        </div>
-
-        <div className="flex items-center justify-between gap-2">
-          <div>
-            <span className="font-heading font-bold text-lg text-charcoal">
-              GHS {product.price}
-            </span>
-            <span className="text-xs text-charcoal-light ml-1">/ {product.unit}</span>
+        {/* Price row pinned to the bottom so every card in a row aligns. */}
+        <div className="mt-auto flex items-end justify-between gap-2 border-t border-charcoal/10 pt-3">
+          <div className="min-w-0">
+            <p className="type-price text-xl text-charcoal leading-none">
+              GHS&nbsp;{product.price}
+            </p>
+            <p className="text-[12px] text-charcoal-light mt-1 truncate">
+              per {product.unit}
+            </p>
           </div>
           <motion.button
-            onClick={() => { addItem(product, product.minQty); toast(`${product.name} added to cart`); }}
-            whileTap={{ scale: 0.82 }}
-            transition={{ type: "spring", stiffness: 500, damping: 25 }}
-            className="w-11 h-11 bg-green-deep text-cream rounded-full flex items-center justify-center hover:bg-green-mid transition-colors shrink-0"
+            onClick={() => {
+              addItem(product, product.minQty);
+              toast(`${product.name} added`);
+            }}
+            whileTap={{ scale: 0.88 }}
+            transition={{ type: "spring", stiffness: 500, damping: 28 }}
+            className="w-10 h-10 bg-green-deep text-cream flex items-center justify-center hover:bg-green-mid transition-colors shrink-0"
             aria-label={`Add ${product.name} to cart`}
           >
-            <ShoppingCart className="w-4 h-4" />
+            <Plus className="w-4 h-4" strokeWidth={2.4} />
           </motion.button>
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }

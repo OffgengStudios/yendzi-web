@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Star, Package, Leaf } from "lucide-react";
+import { Star, Package, Leaf, ShieldCheck, BadgeCheck } from "lucide-react";
 import { products, getProductBySlug } from "../../../lib/mock-data/products";
 import { ProductImages } from "../../../components/product/ProductImages";
 import { FarmerCard } from "../../../components/product/FarmerCard";
@@ -50,7 +50,12 @@ export default async function ProductPage({ params }: Props) {
         <div className="lg:sticky lg:top-24 lg:self-start">
           {/* Badges */}
           <div className="flex flex-wrap gap-2 mb-4">
-            <FreshnessBadge harvestDate={product.harvestDate} size="md" />
+            <FreshnessBadge
+              harvestDate={product.harvestDate}
+              action={product.harvestAction}
+              category={product.category}
+              size="md"
+            />
             {product.badges.map((badge) => (
               <ProductBadge key={badge} badge={badge} size="md" />
             ))}
@@ -94,7 +99,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="bg-white rounded-2xl p-4 mb-6 grid grid-cols-2 gap-3 border border-cream-dark">
             <div className="flex items-center gap-2">
               <Leaf className="w-4 h-4 text-green-deep" />
-              <span className="text-xs text-charcoal-light">Harvest date</span>
+              <span className="text-xs text-charcoal-light capitalize">{product.harvestAction}</span>
               <span className="text-xs font-medium text-charcoal ml-auto">
                 {new Date(product.harvestDate).toLocaleDateString("en-GH", { day: "numeric", month: "short" })}
               </span>
@@ -110,8 +115,9 @@ export default async function ProductPage({ params }: Props) {
           <AddToCartButtonSection product={JSON.parse(JSON.stringify(product))} />
 
           {/* Freshness guarantee */}
-          <p className="text-xs text-charcoal-light text-center mt-3">
-            🌱 Freshness guaranteed — full refund if not satisfied
+          <p className="text-xs text-charcoal-light text-center mt-3 flex items-center justify-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-green-mid shrink-0" />
+            Freshness guaranteed — full refund if not satisfied
           </p>
         </div>
       </div>
@@ -136,7 +142,9 @@ export default async function ProductPage({ params }: Props) {
                   <div>
                     <p className="text-sm font-medium text-charcoal">{review.author}</p>
                     {review.verified && (
-                      <p className="text-xs text-green-mid">✓ Verified purchase</p>
+                      <p className="text-xs text-green-mid flex items-center gap-1">
+                        <BadgeCheck className="w-3.5 h-3.5 shrink-0" /> Verified purchase
+                      </p>
                     )}
                   </div>
                 </div>

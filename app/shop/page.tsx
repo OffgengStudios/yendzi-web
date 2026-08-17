@@ -2,11 +2,12 @@
 
 import { useState, useMemo, useEffect, Suspense } from "react";
 import { useSearchParams, usePathname } from "next/navigation";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, SearchX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { products } from "../../lib/mock-data/products";
 import { categories } from "../../lib/mock-data/categories";
 import { ProductCard } from "../../components/shop/ProductCard";
+import { Icon } from "../../components/ui/Icon";
 import type { Badge, ProductCategory } from "../../lib/types";
 
 const BADGE_OPTIONS: { value: Badge; label: string }[] = [
@@ -197,8 +198,8 @@ function ShopContent() {
           {/* Product grid */}
           {filtered.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-4xl mb-4">🌱</p>
-              <p className="text-charcoal-light">No products match your filters.</p>
+              <SearchX className="w-7 h-7 text-charcoal/25 mx-auto mb-4" strokeWidth={1.4} />
+              <p className="text-charcoal-light">Nothing in today&apos;s harvest matches those filters.</p>
               <motion.button
                 whileTap={{ scale: 0.94 }}
                 transition={springTap}
@@ -328,13 +329,14 @@ function FilterPanel({
                 onClick={() => setSelectedCategory(cat.id)}
                 whileTap={{ scale: 0.96 }}
                 transition={springTap}
-                className={`w-full text-left text-sm px-3 py-2.5 rounded-lg transition-colors flex items-center gap-2 ${
+                className={`w-full text-left text-sm px-3 py-2.5 transition-colors flex items-center gap-2.5 ${
                   selectedCategory === cat.id
                     ? "bg-green-deep text-cream font-medium"
                     : "text-charcoal hover:bg-cream-dark"
                 }`}
               >
-                <span>{cat.icon}</span> {cat.name}
+                <Icon name={cat.icon} className="w-4 h-4 shrink-0" />
+                {cat.name}
               </motion.button>
             </li>
           ))}
