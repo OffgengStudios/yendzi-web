@@ -14,7 +14,13 @@ import { useCartStore } from "../../lib/store/cart";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const closeCart = useCartStore((s) => s.closeCart);
-  const isDemoRoute = pathname === "/demo" || pathname.startsWith("/demo/");
+  // The vendor portal, admin and the auth screens all carry their own chrome.
+  // Rendering the storefront header and footer around them stacked two
+  // navigations on one page, showed the wordmark twice, and left the sidebar
+  // floating in a gap. Auth is also a funnel: the fewer ways out, the better.
+  // `/login` re-exports the sign-up page, so it needs the same treatment.
+  const CHROMELESS = ["/demo", "/vendor", "/admin", "/signup", "/login"];
+  const isStorefront = !CHROMELESS.some((p) => pathname.startsWith(p));
 
   useEffect(() => {
     closeCart();
@@ -22,11 +28,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {!isDemoRoute && <Header />}
-      {!isDemoRoute && <CartDrawer />}
+      {isStorefront && <Header />}
+      {isStorefront && <CartDrawer />}
       <PageTransition>{children}</PageTransition>
-      {!isDemoRoute && <Footer />}
-      {!isDemoRoute && <BottomNav />}
+      {isStorefront && <Footer />}
+      {isStorefront && <BottomNav />}
       <Toaster />
       <Suspense>
         <DemoBar />

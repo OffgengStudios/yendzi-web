@@ -21,8 +21,22 @@ const slideVariants = {
   exit:   { opacity: 0, x: -24 },
 };
 
+// Green is the shopper's side, brown the farmer's. Picking "I want to sell"
+// already flipped the Continue button; every other colour now flips with it, so
+// the whole screen changes hands rather than one button.
 const roleCfg = {
   customer: {
+    theme: {
+      panelBg:     "bg-green-deep",
+      glowNear:    "bg-green-mid/25",
+      glowFar:     "bg-terra/10",
+      markBg:      "bg-terra",
+      markIcon:    "text-cream",
+      panelAccent: "text-terra",
+      railBg:      "bg-green-deep",
+      railWord:    "text-green-deep",
+      railAccent:  "text-terra-deep",
+    },
     panel: {
       eyebrow: "Fresh from Ghana's soil",
       heading: "Farm-fresh produce,\ndelivered to your door.",
@@ -41,6 +55,17 @@ const roleCfg = {
     checkIcon: "text-green-deep",
   },
   vendor: {
+    theme: {
+      panelBg:     "bg-terra-deep",
+      glowNear:    "bg-terra/25",
+      glowFar:     "bg-green-mid/15",
+      markBg:      "bg-green-sage",
+      markIcon:    "text-terra-deep",
+      panelAccent: "text-green-sage",
+      railBg:      "bg-terra-deep",
+      railWord:    "text-terra-deep",
+      railAccent:  "text-green-mid",
+    },
     panel: {
       eyebrow: "Grow. List. Earn.",
       heading: "Reach 10,000+\nAccra households.",
@@ -79,6 +104,7 @@ export default function SignUpPage() {
   const nationalPhone = phone.replace(/\D/g, "").replace(/^(?:233|0)/, "");
   const fullPhone = `+233${nationalPhone}`;
   const cfg = roleCfg[role];
+  const t = cfg.theme;
 
   const handleSendOtp = async () => {
     if (nationalPhone.length !== 9) return setError("Enter a valid 9-digit Ghanaian number");
@@ -132,26 +158,35 @@ export default function SignUpPage() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="hidden lg:flex flex-col justify-between w-[400px] shrink-0 bg-green-deep p-12 relative overflow-hidden"
+          className={`hidden lg:flex flex-col justify-between w-[400px] shrink-0 p-12 relative overflow-hidden ${t.panelBg}`}
         >
-          <div className="absolute right-0 top-1/3 w-72 h-72 rounded-full bg-green-mid/25 blur-3xl pointer-events-none" />
-          <div className="absolute left-0 bottom-1/4 w-48 h-48 rounded-full bg-terra/10 blur-3xl pointer-events-none" />
+          <div className={`absolute right-0 top-1/3 w-72 h-72 rounded-full blur-3xl pointer-events-none ${t.glowNear}`} />
+          <div className={`absolute left-0 bottom-1/4 w-48 h-48 rounded-full blur-3xl pointer-events-none ${t.glowFar}`} />
 
-          <Link href="/" className="flex items-center gap-2.5 relative z-10">
-            <div className="w-9 h-9 rounded-full bg-terra flex items-center justify-center">
-              <Leaf className="w-4 h-4 text-cream" />
-            </div>
-            <span className="font-heading font-bold text-2xl text-cream">Yendzi</span>
+          {/* The page's only wordmark, and the only way back to the storefront.
+              Since it carries that weight alone it is set at display scale,
+              with the Twi it comes from underneath. */}
+          <Link href="/" className="group relative z-10 self-start">
+            <span className="flex items-center gap-3.5">
+              <span className={`w-12 h-12 rounded-crate grid place-items-center shrink-0 ${t.markBg}`}>
+                <Leaf className={`w-6 h-6 ${t.markIcon}`} strokeWidth={1.75} />
+              </span>
+              <span className="type-wordmark text-cream">Yendzi</span>
+            </span>
+            <span className={`block type-stencil mt-3 transition-colors group-hover:text-cream ${t.panelAccent}`}>
+              Yɛn adze · our thing
+            </span>
           </Link>
 
           <div className="relative z-10">
-            <p className="text-terra text-xs font-semibold tracking-widest uppercase mb-4">
+            <p className={`text-xs font-semibold tracking-widest uppercase mb-4 ${t.panelAccent}`}>
               {cfg.panel.eyebrow}
             </p>
             <h2 className="font-heading text-3xl font-bold text-cream leading-tight mb-4 whitespace-pre-line">
               {cfg.panel.heading}
             </h2>
-            <p className="text-cream/60 text-sm leading-relaxed max-w-xs">
+            {/* 60% cream cleared 4.5:1 on green-deep but not on terra-deep. */}
+            <p className="text-cream/70 text-sm leading-relaxed max-w-xs">
               {cfg.panel.sub}
             </p>
           </div>
@@ -160,7 +195,8 @@ export default function SignUpPage() {
             {cfg.stats.map((s) => (
               <div key={s.label}>
                 <p className="font-heading font-bold text-soft-yellow text-2xl">{s.num}</p>
-                <p className="text-cream/50 text-xs mt-0.5">{s.label}</p>
+                {/* 50% cream was 3.3:1 on either ground — under AA at 12px. */}
+                <p className="text-cream/70 text-xs mt-0.5">{s.label}</p>
               </div>
             ))}
           </div>
@@ -170,12 +206,18 @@ export default function SignUpPage() {
       {/* ── Right panel (form) ──────────────────────────────────────── */}
       <div className="flex-1 flex flex-col items-center justify-center p-6 sm:p-10 min-h-screen">
 
-        {/* Mobile logo */}
-        <Link href="/" className="flex items-center gap-2 mb-10 lg:hidden">
-          <div className="w-8 h-8 rounded-full bg-green-deep flex items-center justify-center">
-            <Leaf className="w-4 h-4 text-cream" />
-          </div>
-          <span className="font-heading font-bold text-xl text-green-deep">Yendzi</span>
+        {/* Mobile gets the same lockup — the green panel is desktop-only, so on
+            a phone this is the whole of the page's chrome. */}
+        <Link href="/" className="group mb-10 lg:hidden">
+          <span className="flex items-center gap-3.5">
+            <span className={`w-12 h-12 rounded-crate grid place-items-center shrink-0 transition-colors duration-300 ${t.railBg}`}>
+              <Leaf className="w-6 h-6 text-cream" strokeWidth={1.75} />
+            </span>
+            <span className={`type-wordmark transition-colors duration-300 ${t.railWord}`}>Yendzi</span>
+          </span>
+          <span className={`block type-stencil mt-3 transition-colors duration-300 ${t.railAccent}`}>
+            Yɛn adze · our thing
+          </span>
         </Link>
 
         <div className="w-full max-w-sm">
@@ -191,11 +233,14 @@ export default function SignUpPage() {
                 exit="exit"
                 transition={{ duration: 0.2 }}
               >
+                {/* The name is already set at display scale in the panel to the
+                    left. Repeating it here just competed with it — and the two
+                    cards below are a better welcome than the word "welcome". */}
                 <h1 className="font-heading text-2xl sm:text-3xl font-bold text-charcoal mb-2">
-                  Welcome to Yendzi
+                  Shopping or selling?
                 </h1>
                 <p className="text-charcoal-light text-sm mb-8">
-                  How would you like to use the platform?
+                  Pick one — you can change it on the next step.
                 </p>
 
                 <div className="flex flex-col gap-3 mb-8">
@@ -317,7 +362,9 @@ export default function SignUpPage() {
                     Phone Number
                   </label>
                   <div className="flex items-center gap-2 border border-cream-dark rounded-2xl px-4 py-3.5 bg-white focus-within:border-green-deep focus-within:ring-2 focus-within:ring-green-deep/10 transition-all">
-                    <span className="text-sm font-semibold text-charcoal shrink-0">🇬🇭 +233</span>
+                    {/* Flag emoji don't render on Windows and are inconsistent
+                        across platforms — the dial code alone is unambiguous. */}
+                    <span className="text-sm font-semibold text-charcoal shrink-0 tnum">+233</span>
                     <div className="w-px h-4 bg-cream-dark shrink-0" />
                     <input
                       type="tel"
