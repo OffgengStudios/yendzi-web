@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Sprout, MapPin } from "lucide-react";
+import { Sprout, MapPin, Check } from "lucide-react";
 import type { Metadata } from "next";
+import { Icon } from "../../components/ui/Icon";
 
 export const metadata: Metadata = {
   title: "About Yendzi — Our Soil. Our Harvest. Our Future.",
@@ -11,22 +12,22 @@ export const metadata: Metadata = {
 
 const beliefs = [
   {
-    emoji: "🌱",
+    icon: "Sprout" as const,
     title: "Food Should Have a Face",
     body: "Every product on Yendzi traces back to the person who grew it. No middlemen hiding the story. Real names, real farms, real soil.",
   },
   {
-    emoji: "🤝",
+    icon: "HeartHandshake" as const,
     title: "Local Is Powerful",
     body: "Every cedi spent on Yendzi flows back to Ghanaian farmers and their communities — supporting the hands that work the land.",
   },
   {
-    emoji: "🌍",
+    icon: "Recycle" as const,
     title: "Green Is Not a Trend",
     body: "Sustainability is part of our heritage. We carry eco-products, push reusable packaging, and believe the future of food must be lighter on the earth.",
   },
   {
-    emoji: "💚",
+    icon: "TreeDeciduous" as const,
     title: "Community Is the Harvest",
     body: "Yendzi is building a community around food and culture — the same spirit that made the market the heartbeat of every Ghanaian town.",
   },
@@ -180,7 +181,7 @@ export default function AboutPage() {
                 key={b.title}
                 className="bg-white rounded-2xl border border-cream-dark p-7 hover:shadow-md hover:border-green-light transition-all duration-200"
               >
-                <span className="text-3xl block mb-4">{b.emoji}</span>
+                <Icon name={b.icon} className="w-6 h-6 text-green-deep mb-4" />
                 <h3 className="font-heading font-bold text-charcoal text-lg mb-3">{b.title}</h3>
                 <p className="text-charcoal-light text-sm leading-relaxed">{b.body}</p>
               </div>
@@ -222,7 +223,7 @@ export default function AboutPage() {
             {promises.map((p) => (
               <li key={p} className="flex items-start gap-4">
                 <div className="shrink-0 w-6 h-6 rounded-full bg-green-deep flex items-center justify-center mt-0.5">
-                  <span className="text-cream text-xs font-bold">✓</span>
+                  <Check className="w-3 h-3 text-cream" strokeWidth={3} />
                 </div>
                 <p className="text-charcoal text-base sm:text-lg leading-relaxed">{p}</p>
               </li>

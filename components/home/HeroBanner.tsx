@@ -6,10 +6,12 @@ import { ArrowRight, Leaf, Sprout, Clock, ShieldCheck } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const stats = [
-  { icon: Sprout, num: "120+", label: "Local Farmers" },
-  { icon: Clock, num: "24hr", label: "Farm to Door" },
-  { icon: ShieldCheck, num: "100%", label: "Traceable" },
+// Named lots with the hour they came in — the one claim a supermarket can't
+// make. Each carries its own verb: greens are cut, a fowl is dressed.
+const INTAKE = [
+  { item: "Kontomire", verb: "cut", farm: "Akua Mensah · Aburi", at: "05:40" },
+  { item: "Pineapple", verb: "cut", farm: "Kofi Asante · Suhum", at: "06:15" },
+  { item: "Akoko tuntum", verb: "dressed", farm: "Ama Boateng · Krobo", at: "07:05" },
 ];
 
 const HERO_PRODUCTS = [
@@ -72,58 +74,43 @@ export function HeroBanner() {
             Fresh from Ghana&apos;s Soil
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-cream leading-[1.08] mb-4 sm:mb-5">
-            From <em className="not-italic text-terra">farm</em><br />
-            to your table.
+          <h1 className="type-display text-cream mb-5 sm:mb-6">
+            Cut this morning<br />
+            in <em className="not-italic text-terra">Aburi</em>.
           </h1>
 
-          <p className="font-heading italic text-cream/75 text-base sm:text-lg mb-3 sm:mb-4 leading-relaxed">
-            Yɛn adze — our thing.
-          </p>
-
-          <p className="text-cream/70 text-sm sm:text-base leading-loose max-w-md mb-8 sm:mb-10">
-            Real farmers. Real freshness. Delivered to your doorstep across Accra
-            before the day is done. Every product on Yendzi traces back to
-            a Ghanaian farmer you can meet.
+          <p className="text-cream/70 text-sm sm:text-base leading-relaxed max-w-md mb-8 sm:mb-10">
+            Yɛn adze — our thing. Order before noon and Akua&apos;s kontomire,
+            Kofi&apos;s pineapple and Ama&apos;s akoko tuntum reach your door in
+            Accra tonight. Every lot carries the farm it came from and the day
+            it came in.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
             <motion.div whileTap={{ scale: 0.96 }} transition={springTap}>
               <Link
                 href="/shop"
-                className="flex items-center justify-center gap-2 bg-terra text-cream px-7 py-4 rounded-full font-semibold text-sm tracking-wide hover:bg-terra/85 transition-all group"
+                className="flex items-center justify-center gap-2 bg-terra text-cream px-7 py-4 font-semibold text-sm hover:bg-terra/85 transition-all group"
               >
-                Shop Fresh Today
+                Shop today&apos;s harvest
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
             <motion.div whileTap={{ scale: 0.96 }} transition={springTap}>
               <Link
                 href="/farmers"
-                className="flex items-center justify-center gap-2 border border-green-light/30 text-green-light/80 text-sm font-medium px-7 py-4 rounded-full hover:text-cream hover:border-cream transition-colors"
+                className="flex items-center justify-center gap-2 border border-green-light/30 text-green-light/80 text-sm font-medium px-7 py-4 hover:text-cream hover:border-cream transition-colors"
               >
-                Meet our farmers
+                Meet the farms
               </Link>
             </motion.div>
           </div>
 
-          {/* Traction signal */}
-          <div className="flex items-center gap-2 mt-5">
-            <div className="flex -space-x-1.5">
-              {[
-                "https://images.pexels.com/photos/36611201/pexels-photo-36611201.jpeg?auto=compress&cs=tinysrgb&w=120",
-                "https://images.pexels.com/photos/27935664/pexels-photo-27935664.jpeg?auto=compress&cs=tinysrgb&w=120",
-                "https://images.pexels.com/photos/30893262/pexels-photo-30893262.jpeg?auto=compress&cs=tinysrgb&w=120",
-              ].map((src) => (
-                <div key={src} className="w-7 h-7 rounded-full border-2 border-green-deep overflow-hidden relative">
-                  <Image src={src} alt="User" fill className="object-cover" sizes="28px" />
-                </div>
-              ))}
-            </div>
-            <p className="text-cream/70 text-xs">
-              <span className="text-soft-yellow font-semibold">1,200+</span> households on early access
-            </p>
-          </div>
+          {/* Cut-off time, not a vanity count. It tells you when to act. */}
+          <p className="text-cream/50 text-[13px] mt-6 border-t border-green-light/15 pt-4 max-w-md">
+            Orders close at <span className="text-soft-yellow tnum">12:00</span> for
+            same-day delivery in Accra. Delivery GHS <span className="tnum">25</span>.
+          </p>
 
           {/* Mobile product preview strip */}
           <div className="lg:hidden mt-7 overflow-x-auto -mx-4 px-4 scrollbar-hide">
@@ -197,36 +184,49 @@ export function HeroBanner() {
               </div>
             </div>
 
-            {/* Floating stat pills */}
-            <div className="absolute -right-4 top-1/3 flex flex-col gap-3">
-              {stats.map((s, i) => (
-                <div
-                  key={s.label}
-                  className="flex items-center gap-3 bg-green-deep/90 border border-green-light/20 backdrop-blur-sm px-4 py-3 min-w-[160px] shadow-lg"
-                  style={{
-                    animationDelay: `${i * 0.15}s`,
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
-                  }}
-                >
-                  <s.icon className="w-5 h-5 text-terra shrink-0" />
-                  <div>
-                    <p className="font-heading font-bold text-cream text-base leading-none">{s.num}</p>
-                    <p className="text-green-light/70 text-[10px] tracking-widest uppercase mt-0.5">{s.label}</p>
-                  </div>
-                </div>
-              ))}
+            {/* The cut list — what actually came in, with who and when. */}
+            <div
+              className="absolute -right-5 top-1/4 w-60 bg-green-deep/92 border border-green-light/20 backdrop-blur-sm"
+              style={{ boxShadow: "0 12px 32px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.10)" }}
+            >
+              <p className="type-stencil text-green-light/50 px-4 pt-3.5 pb-2.5 border-b border-green-light/15">
+                Came in today
+              </p>
+              <ul>
+                {INTAKE.map((lot) => (
+                  <li
+                    key={lot.item}
+                    className="px-4 py-2.5 border-b border-green-light/10 last:border-0 flex items-baseline justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="text-cream text-[13px] font-semibold truncate">{lot.item}</p>
+                      <p className="text-green-light/50 text-[11px] truncate">{lot.verb} · {lot.farm}</p>
+                    </div>
+                    <span className="type-price text-terra text-[13px] shrink-0 tnum">{lot.at}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
 
-        {/* Mobile stats row */}
-        <div className="lg:hidden flex gap-6 mt-2">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <p className="font-heading font-bold text-soft-yellow text-2xl">{s.num}</p>
-              <p className="text-green-light/60 text-xs mt-0.5">{s.label}</p>
-            </div>
-          ))}
+        {/* Mobile gets the same cut list — the hero image is desktop-only. */}
+        <div className="lg:hidden border-y border-green-light/15">
+          <p className="type-stencil text-green-light/50 py-2.5">Came in today</p>
+          <ul className="border-t border-green-light/10">
+            {INTAKE.map((lot) => (
+              <li
+                key={lot.item}
+                className="py-2.5 border-b border-green-light/10 last:border-0 flex items-baseline justify-between gap-3"
+              >
+                <div className="min-w-0">
+                  <p className="text-cream text-sm font-semibold truncate">{lot.item}</p>
+                  <p className="text-green-light/50 text-xs truncate">{lot.verb} · {lot.farm}</p>
+                </div>
+                <span className="type-price text-terra text-sm shrink-0 tnum">{lot.at}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

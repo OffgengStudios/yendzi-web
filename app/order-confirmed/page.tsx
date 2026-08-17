@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { CheckCircle2, Truck, Leaf } from "lucide-react";
+import { CheckCircle2, Truck, Leaf, Check } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 
 function OrderConfirmedContent() {
@@ -30,7 +30,7 @@ function OrderConfirmedContent() {
           Order Confirmed!
         </h1>
         <p className="text-charcoal-light text-base mb-2">
-          Akwaaaba — your order is on its way! 🎉
+          Akwaaba — your order is on its way.
         </p>
         <p className="text-charcoal-light text-sm mb-8">
           Our farmers are preparing your fresh produce right now.
@@ -69,7 +69,7 @@ function OrderConfirmedContent() {
                       : "border-2 border-cream-dark"
                   }`}
                 >
-                  {status.done && "✓"}
+                  {status.done && <Check className="w-3 h-3" strokeWidth={3} />}
                 </div>
                 <span className={status.done ? "text-charcoal" : "text-charcoal-light"}>
                   {status.label}

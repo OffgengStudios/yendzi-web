@@ -10,7 +10,7 @@ import { CartItem } from "../../components/cart/CartItem";
 import { Button } from "../../components/ui/Button";
 import { Input } from "../../components/ui/Input";
 import { openPaystackCheckout } from "../../lib/paystack";
-import { MapPin, Clock, CreditCard, Check, Loader2 } from "lucide-react";
+import { MapPin, Clock, CreditCard, Check, Loader2, Smartphone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { clsx } from "clsx";
 
@@ -302,7 +302,10 @@ export default function CheckoutPage() {
                 </div>
 
                 <div className="bg-green-light rounded-xl p-4 mb-5 text-sm text-charcoal">
-                  <p className="font-medium mb-1">💳 Pay with Mobile Money or Card</p>
+                  <p className="font-medium mb-1 flex items-center gap-2">
+                    <Smartphone className="w-4 h-4 text-green-deep shrink-0" />
+                    Pay with Mobile Money or card
+                  </p>
                   <p className="text-charcoal-light">
                     MTN MoMo, Telecel Cash, AirtelTigo Money, or Visa/Mastercard — powered by Paystack.
                   </p>

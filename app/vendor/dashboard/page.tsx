@@ -30,12 +30,8 @@ export default function VendorDashboard() {
     <div className="p-4 sm:p-8 max-w-5xl">
       {/* Header */}
       <div className="mb-6 sm:mb-8">
-        <h1 className="font-heading text-xl sm:text-2xl font-bold text-charcoal">
-          Good morning, {businessName || "Farmer"} 👋
-        </h1>
-        <p className="text-charcoal-light text-sm mt-1">
-          Here&apos;s what&apos;s happening on your farm store today.
-        </p>
+        <p className="type-stencil text-charcoal-light mb-2">Today&apos;s book</p>
+        <h1 className="type-h2 text-charcoal">{businessName || "My Farm"}</h1>
       </div>
 
       {/* Stats */}

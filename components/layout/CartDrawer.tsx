@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { X, ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
+import { X, ShoppingCart, ShoppingBasket, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -87,8 +87,10 @@ export function CartDrawer() {
         <div className="flex-1 min-h-0 overflow-y-auto px-6 py-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-              <div className="text-5xl">🛒</div>
-              <p className="text-charcoal-light text-sm">Your cart is empty.</p>
+              <ShoppingBasket className="w-8 h-8 text-charcoal/25" strokeWidth={1.4} />
+              <p className="text-charcoal-light text-sm max-w-[22ch]">
+                Nothing in the basket yet. Today&apos;s harvest is waiting.
+              </p>
               <Button variant="outline" size="sm" onClick={() => { closeCart(); router.push("/shop"); }}>
                 Start shopping
               </Button>

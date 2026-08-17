@@ -9,8 +9,6 @@ import { SubscriptionBoxes } from "../components/home/SubscriptionBoxes";
 import { ImpactSection } from "../components/home/ImpactSection";
 import { LearnPreview } from "../components/home/LearnPreview";
 import { ScrollReveal } from "../components/ui/ScrollReveal";
-import { Leaf, Truck, ShieldCheck } from "lucide-react";
-import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -39,37 +37,17 @@ export default function HomePage() {
         <FeaturedProducts />
       </ScrollReveal>
 
-      {/* Value props */}
+      {/* The three-icon value-prop row that lived here said what the rest of
+          the page already shows. One line of terms replaces it. */}
       <ScrollReveal>
-        <section className="bg-cream py-14 px-4">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-              {[
-                {
-                  icon: <Leaf className="w-7 h-7 text-green-deep" />,
-                  title: "100% Traceable",
-                  desc: "Every product links to a named farmer with a verified farm location and story.",
-                },
-                {
-                  icon: <Truck className="w-7 h-7 text-terra" />,
-                  title: "Harvested & Delivered",
-                  desc: "From farm to your door in under 24 hours. Fresh, not processed.",
-                },
-                {
-                  icon: <ShieldCheck className="w-7 h-7 text-green-mid" />,
-                  title: "Freshness Guarantee",
-                  desc: "Not happy? We'll refund or replace — no questions asked.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="flex flex-col items-center gap-3 p-6">
-                  <div className="w-14 h-14 bg-cream rounded-2xl flex items-center justify-center">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-semibold text-charcoal text-lg">{item.title}</h3>
-                  <p className="text-charcoal-light text-sm leading-relaxed max-w-xs">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+        <section className="bg-cream border-y border-charcoal/15">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-wrap items-center gap-x-8 gap-y-2">
+            <p className="type-stencil text-charcoal-light">Terms</p>
+            <p className="text-sm text-charcoal">
+              Delivery GHS <span className="tnum">25</span> across Accra
+            </p>
+            <p className="text-sm text-charcoal">Orders close <span className="tnum">12:00</span></p>
+            <p className="text-sm text-charcoal">Not fresh? Refunded, no questions</p>
           </div>
         </section>
       </ScrollReveal>

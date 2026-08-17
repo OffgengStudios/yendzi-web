@@ -13,16 +13,17 @@ export function FarmerSpotlight() {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Text */}
           <div>
-            <p className="text-terra font-medium text-sm uppercase tracking-widest mb-4">
-              Farmer Spotlight
+            <p className="type-stencil text-terra mb-4">
+              Farm {farmer.id} · {farmer.region} Region
             </p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-cream leading-tight mb-5">
-              Real people. Real farms. Real food.
+            <h2 className="type-h2 text-cream mb-5">
+              {farmer.name} has worked the red soil at {farmer.location.split(",")[0]}{" "}
+              since {new Date(farmer.memberSince).getFullYear()}.
             </h2>
             <p className="text-cream/70 text-base leading-relaxed mb-6">
-              Every product on Yendzi traces back to a named farmer with a real story.
-              We visit every farm, verify every claim, and make sure every harvest
-              is worth putting on your table.
+              {farmer.productsCount} lots on Yendzi today, each one dated. We walk
+              every farm before it lists and check the claims on the label —{" "}
+              {farmer.certifications.join(", ").toLowerCase()} included.
             </p>
 
             <blockquote className="border-l-4 border-terra pl-4 mb-8">

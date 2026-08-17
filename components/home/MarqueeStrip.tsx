@@ -24,7 +24,7 @@ export function MarqueeStrip() {
             className="inline-flex items-center gap-3 text-cream text-xs font-semibold tracking-widest uppercase px-10"
           >
             {item}
-            <span className="opacity-50 text-[8px]">✦</span>
+            <span className="opacity-40 text-[7px]" aria-hidden>&#9642;</span>
           </span>
         ))}
       </div>

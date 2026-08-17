@@ -1,38 +1,43 @@
-const stats = [
-  { num: "120+", label: "Farmers Supported" },
-  { num: "5K+",  label: "Orders Delivered" },
-  { num: "30%",  label: "Spoilage Reduced" },
-  { num: "2T",   label: "Plastic Avoided" },
-];
+import { farmers } from "../../lib/mock-data/farmers";
 
+/**
+ * The ledger, not a stat row.
+ *
+ * A grid of big round numbers with `+` and `%` suffixes is the most generic
+ * shape this section could take. It reads as a pitch deck. Naming the farms
+ * and their regions says the same thing and can actually be checked.
+ */
 export function ImpactSection() {
   return (
-    <section className="bg-green-deep py-20 px-4 text-center">
-      <div className="max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-3 text-terra text-xs font-semibold tracking-widest uppercase mb-5">
-          <span className="w-6 h-px bg-terra block" />
-          Our Impact
-          <span className="w-6 h-px bg-terra block" />
+    <section className="bg-green-deep py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-end justify-between gap-6 border-b border-green-light/20 pb-4 mb-10">
+          <h2 className="type-h2 text-cream max-w-xl">
+            Every crate on this site has a name on it.
+          </h2>
+          <p className="type-stencil text-terra pb-1 shrink-0">
+            {farmers.length} farms · Eastern &amp; Greater Accra
+          </p>
         </div>
-        <h2 className="font-heading text-3xl sm:text-4xl font-bold text-cream mb-3">
-          Every order is a ripple.
-        </h2>
-        <p className="text-green-light/70 text-base italic mb-14">
-          Across every harvest, every delivery, every family fed.
-        </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {stats.map((s, i) => (
-            <div key={s.label} className={`${i < stats.length - 1 ? "sm:border-r sm:border-green-light/20" : ""}`}>
-              <p className="font-heading text-5xl font-bold text-terra leading-none mb-3">
-                {s.num}
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-green-light/15 border border-green-light/15">
+          {farmers.map((f) => (
+            <li key={f.id} className="bg-green-deep p-5 flex items-baseline justify-between gap-4">
+              <div className="min-w-0">
+                <p className="type-h3 text-cream truncate">{f.name}</p>
+                <p className="text-[13px] text-green-light/60 truncate">{f.location}</p>
+              </div>
+              <p className="type-price text-xl text-terra shrink-0 tnum">
+                {f.productsCount}
               </p>
-              <p className="text-green-light/70 text-xs font-semibold tracking-widest uppercase leading-snug">
-                {s.label}
-              </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
+
+        <p className="text-green-light/60 text-sm mt-6 max-w-lg">
+          Farming since {Math.min(...farmers.map((f) => new Date(f.memberSince).getFullYear()))}.
+          Every lot lists the farm it came from and the day it came in.
+        </p>
       </div>
     </section>
   );

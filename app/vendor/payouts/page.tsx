@@ -87,7 +87,7 @@ export default function PayoutsPage() {
                 disabled={savedMomo}
                 className="w-full bg-green-deep text-cream rounded-xl py-2 text-xs font-semibold hover:bg-green-mid transition-colors disabled:opacity-80"
               >
-                {savedMomo ? "Saved ✓" : "Save number"}
+                {savedMomo ? "Saved" : "Save number"}
               </button>
             </div>
           )}

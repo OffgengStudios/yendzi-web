@@ -9,54 +9,42 @@ import { motion, AnimatePresence } from "framer-motion";
 const customerSteps = [
   {
     icon: Search,
-    num: "01",
+    num: "Any time",
     title: "Browse by freshness",
     desc: "Every product shows its harvest date. Filter by category, location, or badge — organic, local, seasonal.",
-    color: "bg-green-light",
-    iconColor: "text-green-deep",
   },
   {
     icon: ShoppingCart,
-    num: "02",
+    num: "Before 12:00",
     title: "Order in seconds",
     desc: "Add to cart, pick a delivery slot that works for you, and pay via MoMo, Telecel Cash, or card — all in under 3 minutes.",
-    color: "bg-soft-yellow-light",
-    iconColor: "text-charcoal",
   },
   {
     icon: Truck,
-    num: "03",
+    num: "By 18:00",
     title: "Delivered same day",
     desc: "Your produce leaves the farm within hours. Track your order in real time and receive it at your door — fresh, not frozen.",
-    color: "bg-terra-light",
-    iconColor: "text-terra",
   },
 ];
 
 const farmerSteps = [
   {
     icon: Leaf,
-    num: "01",
+    num: "2 minutes",
     title: "List your harvest",
     desc: "Apply in 2 minutes. Once approved, list your products with photos, prices, and available stock — no technical skills needed.",
-    color: "bg-green-light",
-    iconColor: "text-green-deep",
   },
   {
     icon: Bell,
-    num: "02",
+    num: "Instant",
     title: "Get notified on orders",
     desc: "When a customer orders, you get an instant WhatsApp alert. Pack the order and Yendzi handles pickup and delivery.",
-    color: "bg-soft-yellow-light",
-    iconColor: "text-charcoal",
   },
   {
     icon: Banknote,
-    num: "03",
+    num: "Every Friday",
     title: "Get paid via MoMo",
     desc: "Earnings land in your MTN MoMo or Telecel Cash wallet every Friday — no bank account required. No middlemen. Full transparency.",
-    color: "bg-terra-light",
-    iconColor: "text-terra",
   },
 ];
 
@@ -68,27 +56,24 @@ export function HowItWorks() {
     <section className="bg-white py-16 sm:py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <p className="text-terra text-xs font-semibold tracking-widest uppercase mb-3">The Yendzi Model</p>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-charcoal mb-4">
-            How it works
-          </h2>
-          <p className="text-charcoal-light text-base max-w-md mx-auto">
-            A direct marketplace connecting Ghanaian farmers to urban households — no middlemen, no cold storage.
-          </p>
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-charcoal/15 pb-4 mb-8">
+          <div>
+            <p className="type-stencil text-terra mb-2">The Yendzi model</p>
+            <h2 className="type-h2 text-charcoal">No middlemen. No cold storage.</h2>
+          </div>
         </div>
 
         {/* Tab toggle */}
-        <div className="flex justify-center mb-10">
-          <div className="flex bg-cream rounded-full p-1 gap-1">
+        <div className="flex mb-10">
+          <div className="flex border border-charcoal/20">
             <motion.button
               onClick={() => setTab("customer")}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
               className={clsx(
-                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all",
+                "px-6 py-2.5 text-sm font-semibold transition-colors",
                 tab === "customer"
-                  ? "bg-green-deep text-cream shadow-sm"
+                  ? "bg-green-deep text-cream"
                   : "text-charcoal-light hover:text-charcoal"
               )}
             >
@@ -99,7 +84,7 @@ export function HowItWorks() {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
               className={clsx(
-                "px-6 py-2.5 rounded-full text-sm font-semibold transition-all",
+                "px-6 py-2.5 text-sm font-semibold transition-colors",
                 tab === "farmer"
                   ? "bg-green-deep text-cream shadow-sm"
                   : "text-charcoal-light hover:text-charcoal"
@@ -123,16 +108,14 @@ export function HowItWorks() {
             {steps.map((step, i) => (
               <div key={step.num} className="relative">
                 {/* Connector line — desktop only */}
-                {i < steps.length - 1 && (
-                  <div className="hidden sm:block absolute top-8 left-[calc(50%+2.5rem)] w-[calc(100%-5rem)] h-px border-t-2 border-dashed border-cream-dark z-0" />
-                )}
+                {i < steps.length - 1 && <span className="sr-only">then</span>}
 
-                <div className="relative z-10 flex flex-col items-center text-center sm:block sm:text-left">
-                  <div className={clsx("w-16 h-16 rounded-2xl flex items-center justify-center mb-5 mx-auto sm:mx-0", step.color)}>
-                    <step.icon className={clsx("w-7 h-7", step.iconColor)} />
+                <div className="relative z-10 border-t-2 border-charcoal/20 pt-4">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <step.icon className="w-5 h-5 text-green-deep" strokeWidth={1.7} />
+                    <p className="type-stencil text-terra">{step.num}</p>
                   </div>
-                  <p className="text-xs font-bold text-charcoal-light tracking-widest mb-1">{step.num}</p>
-                  <h3 className="font-heading font-bold text-charcoal text-lg mb-2">{step.title}</h3>
+                  <h3 className="type-h3 text-charcoal mb-1.5">{step.title}</h3>
                   <p className="text-charcoal-light text-sm leading-relaxed">{step.desc}</p>
                 </div>
               </div>
@@ -146,7 +129,7 @@ export function HowItWorks() {
             <>
               <Link
                 href="/shop"
-                className="flex items-center gap-2 bg-green-deep text-cream px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-green-mid transition-colors"
+                className="flex items-center gap-2 bg-green-deep text-cream px-8 py-3.5 font-semibold text-sm hover:bg-green-mid transition-colors"
               >
                 Start shopping <ArrowRight className="w-4 h-4" />
               </Link>
@@ -161,7 +144,7 @@ export function HowItWorks() {
             <>
               <Link
                 href="/vendor/apply"
-                className="flex items-center gap-2 bg-terra text-cream px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-terra/85 transition-colors"
+                className="flex items-center gap-2 bg-terra text-cream px-8 py-3.5 font-semibold text-sm hover:bg-terra/85 transition-colors"
               >
                 Apply to sell on Yendzi <ArrowRight className="w-4 h-4" />
               </Link>

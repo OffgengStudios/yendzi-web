@@ -1,26 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { ArrowRight, Sprout, Home, Building2 } from "lucide-react";
 
 const boxes = [
   {
-    icon: "🌿",
+    icon: Sprout,
     name: "Garden Box",
     desc: "Seasonal vegetables for 2 — perfect for households",
     price: "GHS 85",
     per: "per week",
   },
   {
-    icon: "🏡",
+    icon: Home,
     name: "Family Box",
     desc: "Full produce for 4–6 including fruits, veg & herbs",
     price: "GHS 160",
     per: "per week",
   },
   {
-    icon: "🏢",
+    icon: Building2,
     name: "Business Box",
     desc: "Bulk supply for restaurants & offices — fully customisable",
     price: "GHS 420",
@@ -73,7 +73,7 @@ export function SubscriptionBoxes() {
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl">{box.icon}</span>
+                  <box.icon className="w-6 h-6 text-cream/80" strokeWidth={1.6} />
                   <div>
                     <p className="font-heading font-semibold text-cream text-base">{box.name}</p>
                     <p className="text-cream/65 text-xs mt-0.5">{box.desc}</p>
