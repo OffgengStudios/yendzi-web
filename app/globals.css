@@ -6,6 +6,13 @@
   --color-green-light: #E8F5EE;
   --color-terra: #C2714F;
   --color-terra-light: #F9EDE8;
+  /* Terra and green-deep are not interchangeable as page grounds: cream on
+     terra is 3.2:1, which fails for body text. These two are the terra hue
+     darkened and the green hue lightened to the point where each can stand in
+     for the other — terra-deep carries cream at 8.0:1, green-deep does 8.6:1.
+     No new hues, just the ends the existing pair was missing. */
+  --color-terra-deep: #6E3B26;
+  --color-green-sage: #86B497;
   --color-cream: #F5F0E8;
   --color-cream-dark: #EDE5D8;
   --color-charcoal: #2C2C2C;
@@ -14,8 +21,13 @@
   --color-soft-yellow-light: #FEF9E7;
   --color-gold: #C8A96E;
 
-  --font-heading: var(--font-playfair);
-  --font-body: var(--font-inter);
+  --font-heading: var(--font-archivo);
+  --font-body: var(--font-archivo);
+
+  /* Crates and price boards are rectangles. Soft corners are the exception,
+     not the default — `rounded-full` is reserved for genuinely round things. */
+  --radius-crate: 2px;
+  --radius-card: 4px;
 }
 
 :root {
@@ -26,6 +38,73 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-synthesis-weight: none;
+}
+
+/* ── Type scale ──────────────────────────────────────────────────────────
+   Tracking is size-specific: display tightens as it grows, small caps open
+   up. A single tracking value would be wrong at one end or the other.       */
+
+.type-display {
+  font-family: var(--font-heading);
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-stretch: 82%;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+/* The name is type, not an imported logo file: one heavy condensed cut,
+   tightened as it grows, so it sits in the same voice as the display line. */
+.type-wordmark {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-stretch: 80%;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+}
+
+.type-h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  font-stretch: 86%;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+}
+
+.type-h3 {
+  font-family: var(--font-heading);
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+
+/* Stencilled crate markings — the label stamped on the side of the box. */
+.type-stencil {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-stretch: 88%;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* Prices and quantities must align down a column like a written price list. */
+.type-price {
+  font-family: var(--font-heading);
+  font-stretch: 84%;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Prevent iOS Safari auto-zoom on input focus */

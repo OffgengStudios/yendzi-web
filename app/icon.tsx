@@ -3,6 +3,14 @@ import { ImageResponse } from "next/og";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
+/**
+ * The favicon draws the same leaf mark the header uses, rather than an OS
+ * emoji. An emoji renders as a different picture on every platform — Apple's
+ * herb, Google's herb and Windows' herb are three unrelated drawings — so the
+ * brand mark changed depending on who was looking at the tab.
+ *
+ * Path data is lucide's `leaf`, matching <Leaf /> in the header logo.
+ */
 export default function Icon() {
   return new ImageResponse(
     (
@@ -15,10 +23,21 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 18,
         }}
       >
-        🌿
+        <svg
+          width="19"
+          height="19"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#F5F0E8"
+          strokeWidth="2.1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+        </svg>
       </div>
     ),
     { ...size }

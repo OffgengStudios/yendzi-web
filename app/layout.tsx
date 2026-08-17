@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "../components/layout/AppShell";
 
-const inter = Inter({
+// One superfamily for every role. Display, body and data are separated by
+// width and weight rather than by pairing two faces — the discipline of
+// painted market signage, where one hand letters the whole board.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-playfair",
+  axes: ["wdth"],
+  variable: "--font-archivo",
 });
 
 export const metadata: Metadata = {
@@ -24,7 +22,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={archivo.variable}>
       <body className="font-body min-h-screen flex flex-col bg-cream text-charcoal">
         <AppShell>{children}</AppShell>
       </body>
