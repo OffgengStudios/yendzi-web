@@ -1,0 +1,7 @@
+# core.autocrlf is true in this repo. Git's binary sniffing normally spares
+# these, but a misdetected .docx would be silently corrupted by line-ending
+# conversion, so mark the Office formats explicitly.
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.pdf   binary
