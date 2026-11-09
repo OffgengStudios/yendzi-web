@@ -171,10 +171,7 @@ export default function SignUpPage() {
               <span className={`w-12 h-12 rounded-crate grid place-items-center shrink-0 ${t.markBg}`}>
                 <Leaf className={`w-6 h-6 ${t.markIcon}`} strokeWidth={1.75} />
               </span>
-              <span className="type-wordmark text-cream">Yendzi</span>
-            </span>
-            <span className={`block type-stencil mt-3 transition-colors group-hover:text-cream ${t.panelAccent}`}>
-              Yɛn adze · our thing
+              <span className="type-wordmark text-cream">MM BANAHENE CO. LTD</span>
             </span>
           </Link>
 
@@ -213,10 +210,7 @@ export default function SignUpPage() {
             <span className={`w-12 h-12 rounded-crate grid place-items-center shrink-0 transition-colors duration-300 ${t.railBg}`}>
               <Leaf className="w-6 h-6 text-cream" strokeWidth={1.75} />
             </span>
-            <span className={`type-wordmark transition-colors duration-300 ${t.railWord}`}>Yendzi</span>
-          </span>
-          <span className={`block type-stencil mt-3 transition-colors duration-300 ${t.railAccent}`}>
-            Yɛn adze · our thing
+            <span className={`type-wordmark transition-colors duration-300 ${t.railWord}`}>MM BANAHENE CO. LTD</span>
           </span>
         </Link>
 
@@ -506,7 +500,7 @@ export default function SignUpPage() {
                   <CheckCircle2 className={`w-10 h-10 ${cfg.checkIcon}`} />
                 </motion.div>
                 <h2 className="font-heading text-2xl font-bold text-charcoal mb-2">
-                  Welcome{name ? `, ${name.split(" ")[0]}` : " to Yendzi"}!
+                  Welcome{name ? `, ${name.split(" ")[0]}` : " to MM BANAHENE CO. LTD"}!
                 </h2>
                 <p className="text-charcoal-light text-sm">{cfg.done}</p>
               </motion.div>

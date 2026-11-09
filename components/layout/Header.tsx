@@ -82,7 +82,7 @@ export function Header() {
               <Leaf className="w-4 h-4 text-cream" />
             </div>
             <span className={`font-heading font-bold text-xl tracking-tight transition-colors duration-300 ${logoText}`}>
-              Yendzi
+              MM BANAHENE CO. LTD
             </span>
           </Link>
 

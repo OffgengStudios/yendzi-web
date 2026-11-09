@@ -86,7 +86,7 @@ export default function AdminPage() {
           <Leaf className="w-4 h-4 text-cream" />
         </div>
         <div>
-          <h1 className="font-heading font-bold text-lg">Yendzi Admin</h1>
+          <h1 className="font-heading font-bold text-lg">MM BANAHENE CO. LTD Admin</h1>
           <p className="text-green-light/60 text-xs">Vendor Applications</p>
         </div>
         {pending > 0 && (

@@ -8,7 +8,7 @@ export const farmers: Farmer[] = [
     location: "Aburi, Eastern Region",
     region: "Eastern",
     photo: "https://images.pexels.com/photos/36611201/pexels-photo-36611201.jpeg?auto=compress&cs=tinysrgb&w=600",
-    story: "Auntie Akua has farmed the red soils of Aburi for over 20 years, growing certified organic vegetables for Accra's finest kitchens. She's reduced spoilage by 40% since joining Yendzi.",
+    story: "Auntie Akua has farmed the red soils of Aburi for over 20 years, growing certified organic vegetables for Accra's finest kitchens. She's reduced spoilage by 40% since joining MM BANAHENE CO. LTD.",
     certifications: ["Organic", "GAP Certified"],
     memberSince: "2024-01",
     productsCount: 12,

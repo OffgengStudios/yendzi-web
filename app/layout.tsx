@@ -13,7 +13,7 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Yendzi — Farm-to-Doorstep Ghana",
+  title: "MM BANAHENE CO. LTD — Farm-to-Doorstep Ghana",
   description:
     "Fresh produce, eco products, and local goodness — delivered from Ghana's farms to your door.",
 };

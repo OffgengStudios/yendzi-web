@@ -26,7 +26,7 @@ export default function VendorProductsPage() {
         <div className="bg-white rounded-2xl border border-cream-dark p-10 sm:p-16 text-center">
           <Package className="w-12 h-12 text-charcoal-light/40 mx-auto mb-4" />
           <p className="font-heading font-bold text-charcoal text-lg mb-2">No products yet</p>
-          <p className="text-charcoal-light text-sm mb-6">Add your first product to start selling on Yendzi.</p>
+          <p className="text-charcoal-light text-sm mb-6">Add your first product to start selling on MM BANAHENE CO. LTD.</p>
           <Link
             href="/vendor/products/new"
             className="inline-flex items-center gap-2 bg-green-deep text-cream rounded-full px-6 py-3 text-sm font-semibold hover:bg-green-mid transition-colors"

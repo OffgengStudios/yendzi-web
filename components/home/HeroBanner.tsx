@@ -75,12 +75,12 @@ export function HeroBanner() {
           </div>
 
           <h1 className="type-display text-cream mb-5 sm:mb-6">
-            Cut this morning<br />
-            in <em className="not-italic text-terra">Aburi</em>.
+            MM BANAHENE CO. LTD<br />
+            <em className="not-italic text-terra">COMPANY LTD</em>.
           </h1>
 
           <p className="text-cream/70 text-sm sm:text-base leading-relaxed max-w-md mb-8 sm:mb-10">
-            Yɛn adze — our thing. Order before noon and Akua&apos;s kontomire,
+            Order before noon and Akua&apos;s kontomire,
             Kofi&apos;s pineapple and Ama&apos;s akoko tuntum reach your door in
             Accra tonight. Every lot carries the farm it came from and the day
             it came in.

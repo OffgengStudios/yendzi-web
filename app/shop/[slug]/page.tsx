@@ -21,13 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   return {
-    title: product ? `${product.name} — Yendzi` : "Product not found",
+    title: product ? `${product.name} — MM BANAHENE CO. LTD` : "Product not found",
   };
 }
 
 const mockReviews = [
   { id: "r1", author: "Ama O.", rating: 5, comment: "Absolutely fresh! Arrived the same day, still had soil on them. Best tomatoes I've had in Accra.", date: "2026-05-20", verified: true },
-  { id: "r2", author: "Kojo M.", rating: 5, comment: "My restaurant switched to Yendzi a month ago. Consistent quality, always on time.", date: "2026-05-15", verified: true },
+  { id: "r2", author: "Kojo M.", rating: 5, comment: "My restaurant switched to MM BANAHENE CO. LTD a month ago. Consistent quality, always on time.", date: "2026-05-15", verified: true },
   { id: "r3", author: "Nana A.", rating: 4, comment: "Love that I can see the farmer's name and location. Makes such a difference knowing where it comes from.", date: "2026-05-10", verified: true },
 ];
 

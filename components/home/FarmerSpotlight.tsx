@@ -21,7 +21,7 @@ export function FarmerSpotlight() {
               since {new Date(farmer.memberSince).getFullYear()}.
             </h2>
             <p className="text-cream/70 text-base leading-relaxed mb-6">
-              {farmer.productsCount} lots on Yendzi today, each one dated. We walk
+              {farmer.productsCount} lots on MM BANAHENE CO. LTD today, each one dated. We walk
               every farm before it lists and check the claims on the label —{" "}
               {farmer.certifications.join(", ").toLowerCase()} included.
             </p>

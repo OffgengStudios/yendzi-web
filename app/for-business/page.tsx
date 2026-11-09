@@ -4,7 +4,7 @@ import { Building2, Clock, FileText, Truck, ShieldCheck, ChefHat, ArrowRight, Ch
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Yendzi for Business — Bulk Fresh Produce for Restaurants & Hotels",
+  title: "MM BANAHENE CO. LTD for Business — Bulk Fresh Produce for Restaurants & Hotels",
   description:
     "Premium farm-fresh ingredients delivered on your schedule. Net-7 invoicing, dedicated account manager, custom sourcing for Accra's top restaurants and hotels.",
 };
@@ -75,7 +75,7 @@ export default function ForBusinessPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-green-deep/70 to-green-deep/90" />
         <div className="relative max-w-5xl mx-auto text-center">
           <span className="inline-block bg-terra/20 text-terra-light text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-5">
-            Yendzi for Business
+            MM BANAHENE CO. LTD for Business
           </span>
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             Farm-fresh ingredients,<br className="hidden sm:block" /> built for your kitchen
@@ -130,7 +130,7 @@ export default function ForBusinessPage() {
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-charcoal mb-3">
-              Why kitchens choose Yendzi
+              Why kitchens choose MM BANAHENE CO. LTD
             </h2>
             <p className="text-charcoal-light text-base max-w-xl mx-auto">
               We&apos;re not a wholesale market — we&apos;re a supply partner built around your operations.
@@ -196,7 +196,7 @@ export default function ForBusinessPage() {
           </div>
           <div className="text-center sm:text-left">
             <p className="font-heading text-lg sm:text-xl text-charcoal leading-relaxed mb-4">
-              &ldquo;Before Yendzi, I was at Makola by 5 AM three times a week. Now I send a WhatsApp
+              &ldquo;Before MM BANAHENE CO. LTD, I was at Makola by 5 AM three times a week. Now I send a WhatsApp
               and the produce is waiting when my team arrives. The quality is consistently better
               than anything I could find at the market.&rdquo;
             </p>
@@ -285,7 +285,7 @@ export default function ForBusinessPage() {
       {/* Bottom CTA */}
       <section className="bg-green-deep text-cream py-14 px-4 text-center">
         <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-4">
-          Already on Yendzi? Upgrade to a business account
+          Already on MM BANAHENE CO. LTD? Upgrade to a business account
         </h2>
         <p className="text-cream/70 text-base mb-8 max-w-lg mx-auto">
           Existing customers can unlock bulk pricing, invoice billing, and a dedicated manager

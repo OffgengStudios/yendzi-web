@@ -73,7 +73,7 @@ export default function HomePage() {
         <section className="bg-terra-light py-14 px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-heading text-3xl font-bold text-charcoal mb-3">
-              Yɛn Adze — Our Thing
+              Join Our Community
             </h2>
             <p className="text-charcoal-light text-base mb-6">
               Join thousands of Accra households eating fresh, local, and supporting

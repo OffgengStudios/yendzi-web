@@ -5,8 +5,8 @@ import { farmers } from "../../lib/mock-data/farmers";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Farmers — Yendzi",
-  description: "Meet the Ghanaian farmers behind every Yendzi product.",
+  title: "Our Farmers — MM BANAHENE CO. LTD",
+  description: "Meet the Ghanaian farmers behind every MM BANAHENE CO. LTD product.",
 };
 
 export default function FarmersPage() {
@@ -18,7 +18,7 @@ export default function FarmersPage() {
           Meet Our Farmers
         </h1>
         <p className="text-charcoal-light text-lg leading-relaxed">
-          Every product on Yendzi traces back to a real Ghanaian farmer. We verify every
+          Every product on MM BANAHENE CO. LTD traces back to a real Ghanaian farmer. We verify every
           farm, visit every field, and make sure your food is grown with care.
         </p>
       </div>
@@ -89,14 +89,14 @@ export default function FarmersPage() {
           Are you a Ghanaian farmer?
         </h2>
         <p className="text-charcoal-light text-base mb-6 max-w-md mx-auto">
-          Join Yendzi and reach thousands of urban households in Accra with your produce.
+          Join MM BANAHENE CO. LTD and reach thousands of urban households in Accra with your produce.
           We handle logistics, payments, and marketing — you focus on growing.
         </p>
         <Link
           href="/vendor/apply"
           className="inline-flex items-center gap-2 bg-green-deep text-cream rounded-full px-7 py-3 font-semibold hover:bg-green-mid transition-colors"
         >
-          Sell on Yendzi
+          Sell on MM BANAHENE CO. LTD
         </Link>
       </div>
     </div>

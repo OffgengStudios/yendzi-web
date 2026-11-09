@@ -16,7 +16,7 @@ interface ProductCardProps {
 /**
  * A lot ticket, not a marketing card.
  *
- * The farm and the cutting date are the things Yendzi can claim and nobody
+ * The farm and the cutting date are the things MM BANAHENE CO. LTD can claim and nobody
  * else can, so they get typographic weight. Rating and badges were competing
  * with them for attention and have been demoted. Prices are tabular so they
  * line up down a column the way a written price list does.

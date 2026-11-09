@@ -38,7 +38,7 @@ const farmerSteps = [
     icon: Bell,
     num: "Instant",
     title: "Get notified on orders",
-    desc: "When a customer orders, you get an instant WhatsApp alert. Pack the order and Yendzi handles pickup and delivery.",
+    desc: "When a customer orders, you get an instant WhatsApp alert. Pack the order and MM BANAHENE CO. LTD handles pickup and delivery.",
   },
   {
     icon: Banknote,
@@ -58,7 +58,6 @@ export function HowItWorks() {
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-6 border-b border-charcoal/15 pb-4 mb-8">
           <div>
-            <p className="type-stencil text-terra mb-2">The Yendzi model</p>
             <h2 className="type-h2 text-charcoal">No middlemen. No cold storage.</h2>
           </div>
         </div>
@@ -146,7 +145,7 @@ export function HowItWorks() {
                 href="/vendor/apply"
                 className="flex items-center gap-2 bg-terra text-cream px-8 py-3.5 font-semibold text-sm hover:bg-terra/85 transition-colors"
               >
-                Apply to sell on Yendzi <ArrowRight className="w-4 h-4" />
+                Apply to sell on MM BANAHENE CO. LTD <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/for-business"

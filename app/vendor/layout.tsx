@@ -55,7 +55,7 @@ function SidebarContent({ expanded, onToggle, onNav }: SidebarProps) {
               <Leaf className="w-4 h-4 text-cream" strokeWidth={1.75} />
             </span>
             <span className="min-w-0">
-              <span className="block font-heading font-bold text-base leading-none">Yendzi</span>
+              <span className="block font-heading font-bold text-base leading-none">MM BANAHENE CO. LTD</span>
               <span className="block type-stencil text-green-light/50 mt-1 whitespace-nowrap">Vendor portal</span>
             </span>
           </div>

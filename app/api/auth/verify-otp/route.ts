@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
     const user = {
       id: "u_" + String(phone).replace(/\D/g, "").slice(-9),
-      name: typeof name === "string" && name.trim() ? name.trim() : "Yendzi Customer",
+      name: typeof name === "string" && name.trim() ? name.trim() : "MM BANAHENE CO. LTD Customer",
       phone,
     };
 

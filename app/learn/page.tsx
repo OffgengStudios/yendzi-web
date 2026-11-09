@@ -5,7 +5,7 @@ import { LearnArticles } from "../../components/learn/LearnArticles";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Learn — Yendzi",
+  title: "Learn — MM BANAHENE CO. LTD",
   description: "Guides on seasonal eating, Ghanaian produce, storage tips, and supporting local farmers.",
 };
 

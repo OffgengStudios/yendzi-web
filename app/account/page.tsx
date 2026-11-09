@@ -61,7 +61,7 @@ export default function AccountPage() {
             <User className="w-7 h-7 text-green-deep" />
           </div>
           <h2 className="font-heading text-2xl font-bold text-charcoal mb-3">Sign in to your account</h2>
-          <p className="text-charcoal-light text-sm mb-6">View your orders and manage your Yendzi account.</p>
+          <p className="text-charcoal-light text-sm mb-6">View your orders and manage your MM BANAHENE CO. LTD account.</p>
           <Link
             href="/signup"
             className="inline-flex items-center justify-center gap-2 w-full bg-green-deep text-cream rounded-full py-3 font-semibold hover:bg-green-mid transition-colors"

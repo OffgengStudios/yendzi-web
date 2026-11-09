@@ -5,21 +5,21 @@ import type { Metadata } from "next";
 import { Icon } from "../../components/ui/Icon";
 
 export const metadata: Metadata = {
-  title: "About Yendzi — Our Soil. Our Harvest. Our Future.",
+  title: "About MM BANAHENE CO. LTD — Our Soil. Our Harvest. Our Future.",
   description:
-    "Yendzi connects Ghanaian farmers directly with families. Food with a face, fair to farmers, proudly Ghanaian.",
+    "MM BANAHENE CO. LTD connects Ghanaian farmers directly with families. Food with a face, fair to farmers, proudly Ghanaian.",
 };
 
 const beliefs = [
   {
     icon: "Sprout" as const,
     title: "Food Should Have a Face",
-    body: "Every product on Yendzi traces back to the person who grew it. No middlemen hiding the story. Real names, real farms, real soil.",
+    body: "Every product on MM BANAHENE CO. LTD traces back to the person who grew it. No middlemen hiding the story. Real names, real farms, real soil.",
   },
   {
     icon: "HeartHandshake" as const,
     title: "Local Is Powerful",
-    body: "Every cedi spent on Yendzi flows back to Ghanaian farmers and their communities — supporting the hands that work the land.",
+    body: "Every cedi spent on MM BANAHENE CO. LTD flows back to Ghanaian farmers and their communities — supporting the hands that work the land.",
   },
   {
     icon: "Recycle" as const,
@@ -29,7 +29,7 @@ const beliefs = [
   {
     icon: "TreeDeciduous" as const,
     title: "Community Is the Harvest",
-    body: "Yendzi is building a community around food and culture — the same spirit that made the market the heartbeat of every Ghanaian town.",
+    body: "MM BANAHENE CO. LTD is building a community around food and culture — the same spirit that made the market the heartbeat of every Ghanaian town.",
   },
 ];
 
@@ -82,7 +82,7 @@ export default function AboutPage() {
             Our Soil. Our Harvest.<br className="hidden sm:block" /> Our Future.
           </h1>
           <p className="text-cream/85 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
-            Yendzi connects Ghanaian farmers directly with families, chefs,
+            MM BANAHENE CO. LTD connects Ghanaian farmers directly with families, chefs,
             and communities who care about fresh food, honest sourcing,
             and a healthier future.
           </p>
@@ -124,7 +124,7 @@ export default function AboutPage() {
               watches her harvest spoil because she cannot reach the right customers in time.
             </p>
             <p className="font-medium text-charcoal">
-              So we built Yendzi — a place where the farmer and the family find each other again.
+              So we built MM BANAHENE CO. LTD — a place where the farmer and the family find each other again.
             </p>
           </div>
 
@@ -145,23 +145,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Why "Yendzi"? ── */}
+      {/* ── Our Purpose ── */}
       <section className="py-10 px-4 bg-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-charcoal mb-6">
-            Why &ldquo;Yendzi&rdquo;?
+            Our Purpose
           </h2>
-          <p className="text-charcoal-light text-base sm:text-lg leading-loose mb-6">
-            <strong className="text-charcoal">Yendzi (yen-dzee)</strong> comes from the Twi phrase{" "}
-            <strong className="text-charcoal">yɛn adze</strong> — meaning:
-          </p>
-          <blockquote className="border-l-4 border-green-deep pl-6 my-8">
-            <p className="font-heading text-xl sm:text-2xl text-charcoal italic leading-snug">
-              Our thing.<br />
-              What belongs to us.<br />
-              What we share.
-            </p>
-          </blockquote>
           <p className="text-charcoal-light text-base sm:text-lg leading-loose">
             Because the food on our table, the soil it grew in, and the hands that grew it —
             all of it is ours.
@@ -243,11 +232,8 @@ export default function AboutPage() {
             believes Ghana can do this better — there is a seat at this table for you.
           </p>
           <h3 className="font-heading text-xl font-semibold text-cream mb-3">
-            Welcome to Yendzi.
+            Welcome to MM BANAHENE CO. LTD.
           </h3>
-          <p className="font-heading italic text-2xl text-gold mb-10">
-            Yɛn adze.
-          </p>
           <Link
             href="/shop"
             className="inline-flex items-center justify-center gap-2 bg-terra text-cream rounded-full px-9 py-4 font-semibold text-base hover:bg-terra/85 transition-colors"

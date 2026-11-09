@@ -33,7 +33,7 @@ const articles = [
   {
     icon: BookOpen,
     category: "Guides",
-    title: "Understanding freshness dates on Yendzi products",
+    title: "Understanding freshness dates on MM BANAHENE CO. LTD products",
     excerpt: "What the harvest date actually means, how we calculate freshness scores, and why it matters for nutrition.",
     readTime: "4 min",
     image: "https://images.pexels.com/photos/36611201/pexels-photo-36611201.jpeg?auto=compress&cs=tinysrgb&w=700",

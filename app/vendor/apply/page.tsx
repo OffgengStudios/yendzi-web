@@ -59,7 +59,7 @@ export default function VendorApplyPage() {
             Application received!
           </h2>
           <p className="text-charcoal-light text-sm leading-relaxed mb-8">
-            Welcome to Yendzi, <strong className="text-charcoal">{form.businessName}</strong>.
+            Welcome to MM BANAHENE CO. LTD, <strong className="text-charcoal">{form.businessName}</strong>.
             Your account is ready — you can now list your first product and start selling.
           </p>
           <Link
@@ -81,7 +81,7 @@ export default function VendorApplyPage() {
           <Leaf className="w-6 h-6 text-cream" />
         </div>
         <h1 className="font-heading text-3xl sm:text-4xl font-bold mb-3">
-          Sell on Yendzi
+          Sell on MM BANAHENE CO. LTD
         </h1>
         <p className="text-cream/75 text-base max-w-md mx-auto leading-relaxed">
           Join 120+ Ghanaian farmers reaching thousands of urban households.

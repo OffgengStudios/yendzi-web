@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const farmer = getFarmerBySlug(slug);
   return {
-    title: farmer ? `${farmer.name} — Yendzi Farmer` : "Farmer not found",
+    title: farmer ? `${farmer.name} — MM BANAHENE CO. LTD Farmer` : "Farmer not found",
     description: farmer?.story,
   };
 }
