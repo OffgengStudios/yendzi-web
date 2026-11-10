@@ -75,7 +75,7 @@ export function HeroBanner() {
           </div>
 
           <h1 className="type-display text-cream mb-5 sm:mb-6">
-            MM BANAHENE CO. LTD<br />
+            MM BANAHENE <br />
             <em className="not-italic text-terra">COMPANY LTD</em>.
           </h1>
 
